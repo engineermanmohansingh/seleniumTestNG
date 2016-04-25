@@ -1,0 +1,12 @@
+selenium:
+    server: local
+    remote:
+        host: http://localhost:8080/wd/hub
+        port: 4444
+    browser: firefox
+    driverpath: "./src/test/resources/seleniumdriver/"
+    timeout: 60
+    
+baseurl: https://www.google.co.in
+Prodbaseurl: https://www.google.com
+testenv: prod
