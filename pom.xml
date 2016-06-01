@@ -108,7 +108,7 @@
 								<fileset>
 									<directory>${pom.basedir}/src/test</directory>
 									<includes>
-										<include>**/cengage/automation/**/*.java</include>
+										<include>**/automation/**/*.java</include>
 									</includes>
 								</fileset>
 							</sources>
