@@ -7,7 +7,6 @@ package com.monibox.selTestNG.smoke.tests;
 
 import static com.monibox.selTestNG.utils.YamlReader.getYamlValue;
 
-import org.junit.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;

@@ -1,8 +1,8 @@
 /target/
-/.classpath
+.classpath
 /.settings/
 /test-output/
-/*.mds.tcLS
-/*.pjs.tcLS
-/*.tcCfgExtender
+*.mds.tcLS
+*.pjs.tcLS
+*.tcCfgExtender
 
