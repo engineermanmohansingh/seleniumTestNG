@@ -1,5 +1,8 @@
 /target/
-
+/.classpath
 /.settings/
 /test-output/
-/.gitignore/
+/*.mds.tcLS
+/*.pjs.tcLS
+/*.tcCfgExtender
+
