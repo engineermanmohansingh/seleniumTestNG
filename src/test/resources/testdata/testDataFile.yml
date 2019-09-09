@@ -3,7 +3,7 @@ selenium:
     remote:
         host: http://localhost:8080/wd/hub
         port: 4444
-    browser: firefox
+    browser: chrome
     driverpath: "./src/test/resources/seleniumdriver/"
     timeout: 60
     

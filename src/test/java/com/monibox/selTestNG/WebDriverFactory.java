@@ -3,6 +3,7 @@ package com.monibox.selTestNG;
 import com.monibox.selTestNG.utils.GetNodeIP;
 import static com.monibox.selTestNG.utils.YamlReader.getYamlValue;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -33,10 +35,11 @@ public class WebDriverFactory {
      * The capabilities.
      */
     private static DesiredCapabilities capabilities = new DesiredCapabilities();
-
+    private static String geckoDriverPath = System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"Drivers"+File.separator+"Windows"+File.separator+"geckodriver.exe";
+    private static String chromeDriverPath = System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"Drivers"+File.separator+"Windows"+File.separator+"chromedriver.exe";
+    
     public static URL url;
 
-    static FirefoxProfile firefoxProfile;
 
     /**
      * Gets the driver.
@@ -123,8 +126,7 @@ public class WebDriverFactory {
      * @return the web driver
      */
     private static WebDriver setChromeDriver(String driverpath) {
-        System.setProperty("webdriver.chrome.driver", driverpath
-                + "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         capabilities.setJavascriptEnabled(true);
         return new ChromeDriver();
     }
@@ -155,9 +157,10 @@ public class WebDriverFactory {
      * @param firefoxProfile the firefox profile
      * @return the web driver
      */
-    private static WebDriver createFirefoxDriver(FirefoxProfile firefoxProfile) {
+    private static WebDriver createFirefoxDriver(FirefoxOptions Options) {
         capabilities.setJavascriptEnabled(true);
-        return new FirefoxDriver(firefoxProfile);
+        System.setProperty("windows.gecko.driver", geckoDriverPath );
+        return new FirefoxDriver(Options);
     }
 
     public static WebDriver createFirefoxDriver() {
@@ -170,8 +173,8 @@ public class WebDriverFactory {
      *
      * @return the firefox profile
      */
-    public static FirefoxProfile getFirefoxProfile() {
-        firefoxProfile = new FirefoxProfile();
+    public static FirefoxOptions getFirefoxProfile() {
+        FirefoxOptions  options = new FirefoxOptions();
         try {
             // firefoxProfile.addExtension(new
             // File("./src/test/resources/firebug.extension/firebug-1.12.5-fx.xpi"));
@@ -187,20 +190,21 @@ public class WebDriverFactory {
             // false);
             // firefoxProfile.addExtension(new
             // File("./src/test/resources/firebug.extension/firepath-0.9.7-fx.xpi"));
-            firefoxProfile.setPreference("layout.css.devPixelsPerPx", "0.8");
-            firefoxProfile.setPreference("dom.max_script_run_time", 30);
-            firefoxProfile.setPreference("network.http.pipelining", true);
-            firefoxProfile.setPreference("network.http.proxy.pipelining", true);
+        	
+        	options.addPreference("layout.css.devPixelsPerPx", "0.8");
+        	options.addPreference("dom.max_script_run_time", 30);
+        	options.addPreference("network.http.pipelining", true);
+        	options.addPreference("network.http.proxy.pipelining", true);
 
-            firefoxProfile.setPreference("browser.cache.disk.enable", false);
-            firefoxProfile.setPreference("browser.cache.memory.enable", false);
-            firefoxProfile.setPreference("browser.cache.offline.enable", false);
-            firefoxProfile.setPreference("network.http.use-cache", false);
+        	options.addPreference("browser.cache.disk.enable", false);
+        	options.addPreference("browser.cache.memory.enable", false);
+        	options.addPreference("browser.cache.offline.enable", false);
+        	options.addPreference("network.http.use-cache", false);
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getLogger(WebDriverFactory.class.getName()).log(
                     Level.SEVERE, null, e);
         }
-        return firefoxProfile;
+        return options;
     }
 }

@@ -18,7 +18,7 @@ import com.monibox.selTestNG.TestSessionCreator;
 
 /**
  *
- * @author qainfotech
+ * @author Manmohan 
  */
 public class googleSmokeTest {
 
